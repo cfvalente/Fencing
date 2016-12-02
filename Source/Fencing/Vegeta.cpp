@@ -3,6 +3,9 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
+#include "VegetaState.h"
+#include "IdleState.h"
+
 
 // Sets default values
 AVegeta::AVegeta()
@@ -36,6 +39,8 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
+	State = new IdleState();
+	State->Update(this);
 
 	/*
 	auto StateMachine = CreateDefaultSubobject<UStateMachineComponent>(TEXT("StateMachine"));
