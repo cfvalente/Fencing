@@ -19,20 +19,19 @@ AVegeta::AVegeta()
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	RootComponent->SetRelativeLocation(FVector::ZeroVector);
 
-	vegeta_mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CannonBarrel"));
+	vegeta_mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VegetaMesh"));
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> vegeta_object(TEXT("/Game/Mannequin/Character/Mesh/SK_Mannequin.SK_Mannequin")); // wherein /Game/ is the Content folder.
 	vegeta_mesh->SetupAttachment(RootComponent);
 	vegeta_mesh->SetSkeletalMesh(vegeta_object.Object);
+	vegeta_mesh->SetRelativeLocation(FVector::ZeroVector);
 
 	spring_arm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	spring_arm->SetupAttachment(vegeta_mesh);
-	spring_arm->SetRelativeLocation(FVector(0.0f, 0.0f, 90.0f));
-	spring_arm->SetRelativeRotation(FRotator(-10.0f, 90.0f, 0.0f));
+	spring_arm->SetRelativeLocation(FVector::ZeroVector);
 
 	our_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
 	our_camera->SetupAttachment(spring_arm);
-	our_camera->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
-	our_camera->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
+	our_camera->SetRelativeLocation(FVector::ZeroVector);
 	our_camera->Activate();
 
 	//camera_direction = FVector(0.0f, 0.0f, 0.0f);
