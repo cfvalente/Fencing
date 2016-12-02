@@ -19,22 +19,33 @@ AVegeta::AVegeta()
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	RootComponent->SetRelativeLocation(FVector::ZeroVector);
 
-	vegeta_mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VegetaMesh"));
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> vegeta_object(TEXT("/Game/Mannequin/Character/Mesh/SK_Mannequin.SK_Mannequin")); // wherein /Game/ is the Content folder.
-	vegeta_mesh->SetupAttachment(RootComponent);
-	vegeta_mesh->SetSkeletalMesh(vegeta_object.Object);
-	vegeta_mesh->SetRelativeLocation(FVector::ZeroVector);
+	VegetaMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VegetaMesh"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> VegetaMeshObject(TEXT("/Game/Mannequin/Character/Mesh/SK_Mannequin.SK_Mannequin")); // wherein /Game/ is the Content folder.
+	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> VegetaAnimationObject(TEXT("/Game/Mannequin/Animations/ThirdPerson_AnimBP.ThirdPerson_AnimBP")); // wherein /Game/ is the Content folder.
+	VegetaMesh->SetupAttachment(RootComponent);
+	VegetaMesh->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
+	VegetaMesh->SetSkeletalMesh(VegetaMeshObject.Object);
+	VegetaMesh->SetRelativeLocation(FVector::ZeroVector);
 
-	spring_arm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	spring_arm->SetupAttachment(vegeta_mesh);
-	spring_arm->SetRelativeLocation(FVector::ZeroVector);
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->SetupAttachment(VegetaMesh);
+	SpringArm->SetRelativeLocation(FVector::ZeroVector);
 
-	our_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
-	our_camera->SetupAttachment(spring_arm);
-	our_camera->SetRelativeLocation(FVector::ZeroVector);
-	our_camera->Activate();
+	OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
+	OurCamera->SetupAttachment(SpringArm);
+	OurCamera->SetRelativeLocation(FVector::ZeroVector);
+	OurCamera->Activate();
 
-	//camera_direction = FVector(0.0f, 0.0f, 0.0f);
+
+	/*
+	auto StateMachine = CreateDefaultSubobject<UStateMachineComponent>(TEXT("StateMachine"));
+	if (StateMachine->IsValidLowLevel()) {
+		StateMachine->AddState(0, FName("Idle"));
+		StateMachine->AddState(1, FName("Stand"));
+		StateMachine->AddState(2, FName("Run"));
+		StateMachine->AddState(3, FName("Push"));
+	};
+	*/
 
 
 }
@@ -43,7 +54,7 @@ AVegeta::AVegeta()
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	VegetaMesh->Play(0);
 }
 
 // Called every frame

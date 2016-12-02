@@ -21,11 +21,10 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	//UCameraComponent* OurCamera;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) UCameraComponent* our_camera;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) USpringArmComponent* spring_arm;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) UCameraComponent* OurCamera;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) USpringArmComponent* SpringArm;
 
 
 	/** Sekeletal Mesh Comp, Set In BP Default Properties */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) USkeletalMeshComponent* vegeta_mesh;
-	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) USkeletalMeshComponent* VegetaMesh;
 };
