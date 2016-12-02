@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "VegetaState.h"
 #include "Vegeta.generated.h"
 
 UCLASS()
@@ -28,8 +27,4 @@ public:
 
 	/** Sekeletal Mesh Comp, Set In BP Default Properties */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) USkeletalMeshComponent* VegetaMesh;
-
-
-protected:
-	class VegetaState *State;
 };
