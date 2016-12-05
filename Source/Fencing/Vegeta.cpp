@@ -3,6 +3,9 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
+#include "State/VegetaState.h"
+#include "State/IdleState.h"
+class VegetaState *teste;
 
 // Sets default values
 AVegeta::AVegeta()
@@ -36,7 +39,7 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
-
+	teste = new IdleState();
 	/*
 	auto StateMachine = CreateDefaultSubobject<UStateMachineComponent>(TEXT("StateMachine"));
 	if (StateMachine->IsValidLowLevel()) {
@@ -54,6 +57,7 @@ AVegeta::AVegeta()
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
+	teste->Update(this);
 	VegetaMesh->Play(0);
 }
 
