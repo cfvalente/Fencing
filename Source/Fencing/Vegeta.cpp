@@ -67,6 +67,7 @@ void AVegeta::BeginAttack()
 bool AVegeta::IsPunching()
 {
 	bool aux = Punching;
+	Punching = false;
 	return aux;
 }
 
