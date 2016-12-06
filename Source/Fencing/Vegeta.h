@@ -11,8 +11,12 @@ class FENCING_API AVegeta : public ACharacter
 	GENERATED_BODY()
 private:
 	class VegetaState *VegetaState;
+	FVector MovementVector = FVector::ZeroVector;
+
 
 	void BeginAttack();
+	void EndAttack();
+	void MoveY(float AxisValue);
 public:	
 	// Sets default values for this actor's properties
 	AVegeta();
@@ -29,14 +33,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) class UCameraComponent* OurCamera;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) class USpringArmComponent* SpringArm;
 
-	/** Sekeletal Mesh Comp, Set In BP Default Properties */
-	//UPROPERTY(BlueprintReadWrite, EditAnywhere) class USkeletalMeshComponent* VegetaMesh;
-
-	/** Collision component */
-	//UPROPERTY(BlueprintReadWrite, EditAnywhere) class USphereComponent* CollisionComponent;
-
-	/** Movement Comp */
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true")) class UPawnMovementComponent* MovementComponent;
+	/** Variaveis com valor padrao */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, category="Defaults") float SpeedMultiplier;
 
 	/** Funcoes usadas para controlar maquina de estados da animacao */
 	UFUNCTION(BlueprintCallable, BlueprintPure, category="State") bool IsIdle();
