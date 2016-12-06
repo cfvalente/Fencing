@@ -8,7 +8,7 @@
 class FENCING_API IdleState : public VegetaState
 {
 public:
-	IdleState() {}
+	IdleState() { SID = State::Idle; }
 	virtual void HandleInput(class UInputComponent *InputComponent);
 	virtual void Update(class AVegeta *Vegeta);
 	virtual ~IdleState();

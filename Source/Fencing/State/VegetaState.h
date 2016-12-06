@@ -12,4 +12,10 @@ public:
 	virtual void HandleInput(class UInputComponent *InputComponent) {}
 	virtual void Update(class AVegeta *Vegeta) {}
 	virtual ~VegetaState() {}
+
+
+	enum class State { Idle, Attack };
+	virtual State getSid() { return SID; }
+protected:
+	State SID;
 };

@@ -27,4 +27,7 @@ public:
 
 	/** Sekeletal Mesh Comp, Set In BP Default Properties */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) USkeletalMeshComponent* VegetaMesh;
+
+	/** Funcoes usadas para controlar maquina de estados da animacao */
+	UFUNCTION(BlueprintCallable, BlueprintPure, category="State") bool IsIdle();
 };

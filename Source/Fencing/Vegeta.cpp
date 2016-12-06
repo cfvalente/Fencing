@@ -68,3 +68,8 @@ void AVegeta::Tick( float DeltaTime )
 
 }
 
+bool AVegeta::IsIdle()
+{
+	return (teste->getSid() == VegetaState::State::Idle);
+}
+
