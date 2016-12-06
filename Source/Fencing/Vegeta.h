@@ -6,10 +6,13 @@
 #include "Vegeta.generated.h"
 
 UCLASS()
-class FENCING_API AVegeta : public APawn
+class FENCING_API AVegeta : public ACharacter
 {
 	GENERATED_BODY()
-	
+private:
+	class VegetaState *VegetaState;
+
+	void BeginAttack();
 public:	
 	// Sets default values for this actor's properties
 	AVegeta();
@@ -20,13 +23,20 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	//UCameraComponent* OurCamera;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) UCameraComponent* OurCamera;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) USpringArmComponent* SpringArm;
+	/** Called to bind functionality to input */
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) class UCameraComponent* OurCamera;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) class USpringArmComponent* SpringArm;
 
 	/** Sekeletal Mesh Comp, Set In BP Default Properties */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere) USkeletalMeshComponent* VegetaMesh;
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere) class USkeletalMeshComponent* VegetaMesh;
+
+	/** Collision component */
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere) class USphereComponent* CollisionComponent;
+
+	/** Movement Comp */
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true")) class UPawnMovementComponent* MovementComponent;
 
 	/** Funcoes usadas para controlar maquina de estados da animacao */
 	UFUNCTION(BlueprintCallable, BlueprintPure, category="State") bool IsIdle();

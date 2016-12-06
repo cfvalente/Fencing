@@ -5,7 +5,7 @@
 
 #include "State/VegetaState.h"
 #include "State/IdleState.h"
-class VegetaState *teste;
+
 
 // Sets default values
 AVegeta::AVegeta()
@@ -17,21 +17,13 @@ AVegeta::AVegeta()
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	SetActorLocation(FVector::ZeroVector);
 
-
-
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	RootComponent->SetRelativeLocation(FVector::ZeroVector);
-
-	VegetaMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VegetaMesh"));
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> VegetaMeshObject(TEXT("/Game/Mannequin/Character/Mesh/SK_Mannequin.SK_Mannequin")); // wherein /Game/ is the Content folder.
 	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> VegetaAnimationObject(TEXT("/Game/Mannequin/Animations/ThirdPerson_AnimBP.ThirdPerson_AnimBP")); // wherein /Game/ is the Content folder.
-	VegetaMesh->SetupAttachment(RootComponent);
-	VegetaMesh->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
-	VegetaMesh->SetSkeletalMesh(VegetaMeshObject.Object);
-	VegetaMesh->SetRelativeLocation(FVector::ZeroVector);
+	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
+	GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	SpringArm->SetupAttachment(VegetaMesh);
+	SpringArm->SetupAttachment(GetMesh());
 	SpringArm->SetRelativeLocation(FVector::ZeroVector);
 
 	OurCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("OurCamera"));
@@ -39,26 +31,15 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
-	teste = new IdleState();
-	/*
-	auto StateMachine = CreateDefaultSubobject<UStateMachineComponent>(TEXT("StateMachine"));
-	if (StateMachine->IsValidLowLevel()) {
-		StateMachine->AddState(0, FName("Idle"));
-		StateMachine->AddState(1, FName("Stand"));
-		StateMachine->AddState(2, FName("Run"));
-		StateMachine->AddState(3, FName("Push"));
-	};
-	*/
-
-
+	VegetaState = new IdleState();
 }
 
 // Called when the game starts or when spawned
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
-	teste->Update(this);
-	VegetaMesh->Play(0);
+	VegetaState->Update(this);
+	GetMesh()->Play(0);
 }
 
 // Called every frame
@@ -68,8 +49,31 @@ void AVegeta::Tick( float DeltaTime )
 
 }
 
+void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+{
+	Super::SetupPlayerInputComponent(InputComponent);
+	InputComponent->BindAction("Attack", IE_Pressed, this, &AVegeta::BeginAttack);
+	/*
+	InputComponent->BindAxis("MoveZ", this, &APlayerCannon::MoveZ);
+	InputComponent->BindAxis("MoveY", this, &APlayerCannon::MoveY);
+	InputComponent->BindAxis("Zoom", this, &APlayerCannon::Zoom);
+	InputComponent->BindAxis("BarrelRotationRoll", this, &APlayerCannon::MoveTurretRoll);
+	InputComponent->BindAxis("BarrelRotationYaw", this, &APlayerCannon::MoveTurretYaw);
+	InputComponent->BindAction("CannonFire", IE_Pressed, this, &APlayerCannon::BeginFire);
+	InputComponent->BindAction("CannonFire", IE_Released, this, &APlayerCannon::EndFire);
+	InputComponent->BindAction("ToggleCamera", IE_Pressed, this, &APlayerCannon::ToggleCamera);
+	*/
+}
+
+void AVegeta::BeginAttack()
+{
+	//MovementComponent->Velocity = FVector(0.0f, 0.0f, 10000.0f);
+	//MovementComponent->AddImpulse(FVector(0.0f, 100.0f, 0.0f), true);
+	//MovementComponent->AddInputVector(FVector(0.0f, 0.0f, 100000.0f));
+}
+
 bool AVegeta::IsIdle()
 {
-	return (teste->getSid() == VegetaState::State::Idle);
+	return (VegetaState->getSid() == VegetaState::State::Idle);
 }
 
