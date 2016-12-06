@@ -34,7 +34,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) class USpringArmComponent* SpringArm;
 
 	/** Variaveis com valor padrao */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, category="Defaults") float SpeedMultiplier;
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere, category="Defaults") float SpeedMultiplier;
 
 	/** Funcoes usadas para controlar maquina de estados da animacao */
 	UFUNCTION(BlueprintCallable, BlueprintPure, category="State") bool IsIdle();

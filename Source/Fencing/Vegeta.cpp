@@ -30,7 +30,6 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
-	if (SpeedMultiplier == 0) SpeedMultiplier = 100.0f;
 	VegetaState = new IdleState();
 }
 
@@ -60,7 +59,7 @@ void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void AVegeta::BeginAttack()
 {
-
+	Jump();
 }
 
 void AVegeta::EndAttack()
@@ -70,7 +69,7 @@ void AVegeta::EndAttack()
 
 void AVegeta::MoveY(float AxisValue)
 {
-	MovementVector += FVector(0.0f, SpeedMultiplier*AxisValue, 0.0f);
+	MovementVector += FVector(0.0f, AxisValue, 0.0f);
 }
 
 bool AVegeta::IsIdle()
