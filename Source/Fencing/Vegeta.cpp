@@ -6,6 +6,7 @@
 #include "State/VegetaState.h"
 #include "State/IdleState.h"
 
+bool Punching = false;
 
 // Sets default values
 AVegeta::AVegeta()
@@ -59,12 +60,19 @@ void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void AVegeta::BeginAttack()
 {
-	Jump();
+	Punching = true;
+	//Jump();
+}
+
+bool AVegeta::IsPunching()
+{
+	bool aux = Punching;
+	return aux;
 }
 
 void AVegeta::EndAttack()
 {
-	MovementVector -= FVector(0.0f, 100.0f, 0.0f);
+	//MovementVector -= FVector(0.0f, 100.0f, 0.0f);
 }
 
 void AVegeta::MoveY(float AxisValue)

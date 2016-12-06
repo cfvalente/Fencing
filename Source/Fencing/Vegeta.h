@@ -37,5 +37,6 @@ public:
 	//UPROPERTY(BlueprintReadWrite, EditAnywhere, category="Defaults") float SpeedMultiplier;
 
 	/** Funcoes usadas para controlar maquina de estados da animacao */
-	UFUNCTION(BlueprintCallable, BlueprintPure, category="State") bool IsIdle();
+	UFUNCTION(BlueprintCallable, BlueprintPure, category = "State") bool IsIdle();
+	UFUNCTION(BlueprintCallable, category = "State") bool IsPunching();
 };
