@@ -3,8 +3,8 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
-#include "State/VegetaState.h"
-#include "State/IdleState.h"
+#include "VegetaState.h"
+#include "IdleState.h"
 
 bool Punching = false;
 
@@ -31,14 +31,14 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
-	VegetaState = new IdleState();
+	//VegetaState = new IdleState();
 }
 
 // Called when the game starts or when spawned
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
-	VegetaState->Update(this);
+	//VegetaState->Update(this);
 	GetMesh()->Play(0);
 }
 
@@ -83,5 +83,5 @@ void AVegeta::MoveY(float AxisValue)
 
 bool AVegeta::IsIdle()
 {
-	return (VegetaState->getSid() == VegetaState::State::Idle);
+	return 1;// (VegetaState->getSid() == VegetaState::State::Idle);
 }

@@ -8,8 +8,12 @@
 class FENCING_API IdleState : public VegetaState
 {
 public:
-	IdleState() { SID = State::Idle; }
-	virtual void HandleInput(class UInputComponent *InputComponent);
-	virtual void Update(class AVegeta *Vegeta);
+	virtual void Enter();
+	virtual void HandleInput(int Button);
+	virtual void Update();
 	virtual ~IdleState();
+
+protected:
+	IdleState(class AVegeta *Vegeta_) { SID = State::Idle, Vegeta = Vegeta_; }
+	static UAnimationAsset *AnimationAsset;
 };

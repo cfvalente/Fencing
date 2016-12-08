@@ -9,13 +9,15 @@ class FENCING_API VegetaState
 {
 public:
 	//virtual VegetaState() {}
-	virtual void HandleInput(class UInputComponent *InputComponent) {}
-	virtual void Update(class AVegeta *Vegeta) {}
+	virtual void Enter() {}
+	virtual void HandleInput(int Button) {}
+	virtual void Update() {}
 	virtual ~VegetaState() {}
 
 
 	enum class State { Idle, Attack };
 	virtual State getSid() { return SID; }
 protected:
+	class AVegeta *Vegeta;
 	State SID;
 };
