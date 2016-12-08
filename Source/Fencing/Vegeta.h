@@ -14,8 +14,8 @@ private:
 	FVector MovementVector = FVector::ZeroVector;
 
 
-	void BeginAttack();
-	void EndAttack();
+	void HandleButton1();
+	void HandleButton2();
 	void MoveY(float AxisValue);
 public:	
 	// Sets default values for this actor's properties

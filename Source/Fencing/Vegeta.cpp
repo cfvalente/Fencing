@@ -3,8 +3,10 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
+
 #include "VegetaState.h"
 #include "IdleState.h"
+#include "StateFactory.h"
 
 bool Punching = false;
 
@@ -19,8 +21,12 @@ AVegeta::AVegeta()
 	
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> VegetaMeshObject(TEXT("/Game/Mannequin/Character/Mesh/SK_Mannequin.SK_Mannequin")); // wherein /Game/ is the Content folder.
 	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> VegetaAnimationObject(TEXT("AnimBlueprint'/Game/Mannequin/Animations/ThirdPerson_AnimBP.ThirdPerson_AnimBP'")); // wherein /Game/ is the Content folder.
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetIdleAnimation(VegetaAnimationIdleObject.Object);
+
 	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
-	GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
+	//GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetMesh());
@@ -31,15 +37,15 @@ AVegeta::AVegeta()
 	OurCamera->SetRelativeLocation(FVector::ZeroVector);
 	OurCamera->Activate();
 
-	//VegetaState = new IdleState();
+	VegetaState = StateFactory::CreateIdle(this);
 }
 
 // Called when the game starts or when spawned
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
-	//VegetaState->Update(this);
-	GetMesh()->Play(0);
+	VegetaState->Enter();
+	//GetMesh()->Play(0);
 }
 
 // Called every frame
@@ -47,33 +53,27 @@ void AVegeta::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 	GetCharacterMovement()->AddInputVector(MovementVector, true);
+	VegetaState->Update();
 	MovementVector = FVector::ZeroVector;
 }
 
 void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
-	InputComponent->BindAction("Attack", IE_Pressed, this, &AVegeta::BeginAttack);
-	InputComponent->BindAction("Attack", IE_Released, this, &AVegeta::EndAttack);
+	InputComponent->BindAction("Button1", IE_Pressed, this, &AVegeta::HandleButton1);
+	InputComponent->BindAction("Button2", IE_Pressed, this, &AVegeta::HandleButton2);
+	//InputComponent->BindAction("Attack", IE_Released, this, &AVegeta::EndAttack);
 	InputComponent->BindAxis("MoveY", this, &AVegeta::MoveY);
 }
 
-void AVegeta::BeginAttack()
+void AVegeta::HandleButton1()
 {
-	Punching = true;
-	//Jump();
+	VegetaState->HandleInput(1);
 }
 
-bool AVegeta::IsPunching()
+void AVegeta::HandleButton2()
 {
-	bool aux = Punching;
-	Punching = false;
-	return aux;
-}
 
-void AVegeta::EndAttack()
-{
-	//MovementVector -= FVector(0.0f, 100.0f, 0.0f);
 }
 
 void AVegeta::MoveY(float AxisValue)
@@ -83,5 +83,12 @@ void AVegeta::MoveY(float AxisValue)
 
 bool AVegeta::IsIdle()
 {
-	return 1;// (VegetaState->getSid() == VegetaState::State::Idle);
+	return (VegetaState->getSid() == VegetaState::State::Idle);
+}
+
+bool AVegeta::IsPunching()
+{
+	bool aux = Punching;
+	Punching = false;
+	return aux;
 }
