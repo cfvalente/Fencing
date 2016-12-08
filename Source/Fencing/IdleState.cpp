@@ -9,19 +9,11 @@ void IdleState::Enter()
 {
 	Vegeta->GetMesh()->PlayAnimation(AnimationAsset, true);
 }
-class VegetaState * IdleState::HandleInput(int Button)
+class VegetaState * IdleState::HandleButton1()
 {
-	VegetaState *NewState;
-	switch (Button)
-	{
-	case 0:
-		break;
-	case 1:
-		break;
-	default:
-		return this;
-	}
 	/* Exemplo do que fazer */
+
+	VegetaState *NewState;
 	NewState = StateFactory::CreateIdle(Vegeta);
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();

@@ -10,7 +10,8 @@ class FENCING_API VegetaState
 public:
 	//virtual VegetaState() {}
 	virtual void Enter() {}
-	virtual class VegetaState * HandleInput(int Button) { return NULL; }
+	virtual class VegetaState * HandleButton1() { return this; }
+	virtual class VegetaState * HandleButton2() { return this; }
 	virtual void Update() {}
 	virtual ~VegetaState() {}
 

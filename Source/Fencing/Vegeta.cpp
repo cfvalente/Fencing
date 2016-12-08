@@ -67,7 +67,7 @@ void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void AVegeta::HandleButton1()
 {
-	VegetaState = VegetaState->HandleInput(1);
+	VegetaState = VegetaState->HandleButton1();
 }
 
 void AVegeta::HandleButton2()

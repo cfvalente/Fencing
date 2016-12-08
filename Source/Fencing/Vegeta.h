@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "Vegeta.generated.h"
 
+
 UCLASS()
 class FENCING_API AVegeta : public ACharacter
 {
