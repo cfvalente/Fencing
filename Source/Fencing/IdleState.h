@@ -12,7 +12,7 @@ class FENCING_API IdleState : public VegetaState
 
 public:
 	virtual void Enter();
-	virtual void HandleInput(int Button);
+	virtual class VegetaState *HandleInput(int Button);
 	virtual void Update();
 	virtual ~IdleState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);

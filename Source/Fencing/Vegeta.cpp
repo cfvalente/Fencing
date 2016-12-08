@@ -5,7 +5,6 @@
 
 
 #include "VegetaState.h"
-#include "IdleState.h"
 #include "StateFactory.h"
 
 bool Punching = false;
@@ -68,7 +67,7 @@ void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void AVegeta::HandleButton1()
 {
-	VegetaState->HandleInput(1);
+	VegetaState = VegetaState->HandleInput(1);
 }
 
 void AVegeta::HandleButton2()
