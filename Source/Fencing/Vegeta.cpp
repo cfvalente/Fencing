@@ -3,7 +3,6 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
-
 #include "VegetaState.h"
 #include "StateFactory.h"
 
@@ -43,6 +42,7 @@ AVegeta::AVegeta()
 void AVegeta::BeginPlay()
 {
 	Super::BeginPlay();
+	PrimaryActorTick.AddPrerequisite(GetMesh(), GetMesh()->PrimaryComponentTick);
 	VegetaState->Enter();
 	//GetMesh()->Play(0);
 }
