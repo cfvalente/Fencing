@@ -12,8 +12,6 @@ class FENCING_API PunchState : public VegetaState
 
 public:
 	virtual void Enter();
-	virtual void HandleButton1();
-	//virtual void HandleButton2();
 	virtual void Update();
 	virtual ~PunchState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);

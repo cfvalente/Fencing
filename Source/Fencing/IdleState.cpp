@@ -9,6 +9,7 @@ UAnimationAsset *IdleState::AnimationAsset = NULL;
 
 void IdleState::Enter()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "Idle");
 	Vegeta->GetMesh()->PlayAnimation(AnimationAsset, true);
 }
 void IdleState::HandleButton1()
@@ -40,7 +41,7 @@ void IdleState::Update()
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->Notify->GetName());
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->NotifyName.ToString());
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->NotifyName.ToString());
 	}
 
 }
@@ -50,5 +51,4 @@ void IdleState::SetAnimation(UAnimationAsset *AnimationAsset_)
 }
 IdleState::~IdleState()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "Passei pelo destrutor!");
 }

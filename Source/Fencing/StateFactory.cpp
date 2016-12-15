@@ -14,7 +14,7 @@ class IdleState* StateFactory::CreateIdle(class AVegeta *Vegeta)
 
 void StateFactory::SetAttackIdleAnimation(UAnimationAsset *Animation)
 {
-	IdleState::AnimationAsset = Animation;
+	AttackIdleState::AnimationAsset = Animation;
 }
 class AttackIdleState* StateFactory::CreateAttackIdle(class AVegeta *Vegeta)
 {
@@ -23,7 +23,7 @@ class AttackIdleState* StateFactory::CreateAttackIdle(class AVegeta *Vegeta)
 
 void StateFactory::SetPunchAnimation(UAnimationAsset *Animation)
 {
-	IdleState::AnimationAsset = Animation;
+	PunchState::AnimationAsset = Animation;
 }
 class PunchState* StateFactory::CreatePunch(class AVegeta *Vegeta)
 {

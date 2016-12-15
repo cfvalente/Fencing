@@ -24,10 +24,10 @@ AVegeta::AVegeta()
 	StateFactory::SetIdleAnimation(VegetaAnimationIdleObject.Object);
 
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationAttackdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
-	StateFactory::SetIdleAnimation(VegetaAnimationAttackdleObject.Object);
+	StateFactory::SetAttackIdleAnimation(VegetaAnimationAttackdleObject.Object);
 
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationPunchObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
-	StateFactory::SetIdleAnimation(VegetaAnimationPunchObject.Object);
+	StateFactory::SetPunchAnimation(VegetaAnimationPunchObject.Object);
 
 	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
 	//GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);

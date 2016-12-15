@@ -9,6 +9,7 @@ UAnimationAsset *AttackIdleState::AnimationAsset = NULL;
 
 void AttackIdleState::Enter()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "AttackIdle");
 	Vegeta->GetMesh()->PlayAnimation(AnimationAsset, true);
 }
 void AttackIdleState::HandleButton1()
@@ -29,12 +30,6 @@ void AttackIdleState::HandleButton2()
 }
 void AttackIdleState::Update()
 {
-	// Detecta os Notify existentes(?)
-	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->NotifyName.ToString());
-	}
-
 }
 void AttackIdleState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {

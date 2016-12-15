@@ -12,8 +12,19 @@ UCLASS()
 class FENCING_API UVegetaAnimNotifyState : public UAnimNotifyState
 {
 	GENERATED_BODY()
-	
-	
-	UVegetaAnimNotifyState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
-	
+
+
+		UVegetaAnimNotifyState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
+
+};
+
+
+UCLASS()
+class FENCING_API UVegetaActiveFrames : public UAnimNotifyState
+{
+	GENERATED_BODY()
+
+
+		UVegetaActiveFrames(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
+
 };
