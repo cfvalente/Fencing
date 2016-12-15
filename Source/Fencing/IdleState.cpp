@@ -23,14 +23,15 @@ class VegetaState * IdleState::HandleButton1()
 void IdleState::Update()
 {
 	// Detecta o Notify State
-	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->ActiveAnimNotifyState.CreateIterator(); it; ++it )
+	/*for (auto it = Vegeta->GetMesh()->AnimScriptInstance->ActiveAnimNotifyState.CreateIterator(); it; ++it )
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, *it->NotifyName.ToString());
-	}
-	// Detecta o Notify lancado nesse tick
+	}*/
+	// Detecta os Notify existentes(?)
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->Notify->GetName());
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->Notify->GetName());
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, (*it)->NotifyName.ToString());
 	}
 
 }
