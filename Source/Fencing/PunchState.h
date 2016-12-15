@@ -6,7 +6,7 @@
 /**
  * 
  */
-class FENCING_API IdleState : public VegetaState
+class FENCING_API PunchState : public VegetaState
 {
 	friend class StateFactory;
 
@@ -15,9 +15,9 @@ public:
 	virtual void HandleButton1();
 	//virtual void HandleButton2();
 	virtual void Update();
-	virtual ~IdleState();
+	virtual ~PunchState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	IdleState(class AVegeta *Vegeta_) { SID = EVegetaState::Idle, Vegeta = Vegeta_; }
+	PunchState(class AVegeta *Vegeta_) { SID = EVegetaState::Punch, Vegeta = Vegeta_; }
 	static UAnimationAsset *AnimationAsset;
 };

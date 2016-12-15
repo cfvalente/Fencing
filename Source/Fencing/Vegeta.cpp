@@ -3,7 +3,7 @@
 #include "Fencing.h"
 #include "Vegeta.h"
 
-#include "VegetaState.h"
+//#include "VegetaState.h"
 #include "StateFactory.h"
 
 bool Punching = false;
@@ -23,6 +23,12 @@ AVegeta::AVegeta()
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetIdleAnimation(VegetaAnimationIdleObject.Object);
 
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationAttackdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetIdleAnimation(VegetaAnimationAttackdleObject.Object);
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationPunchObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetIdleAnimation(VegetaAnimationPunchObject.Object);
+
 	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
 	//GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
 
@@ -36,6 +42,7 @@ AVegeta::AVegeta()
 	OurCamera->Activate();
 
 	VegetaState = StateFactory::CreateIdle(this);
+	Enemy = NULL;
 }
 
 // Called when the game starts or when spawned
@@ -67,12 +74,12 @@ void AVegeta::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void AVegeta::HandleButton1()
 {
-	VegetaState = VegetaState->HandleButton1();
+	VegetaState->HandleButton1();
 }
 
 void AVegeta::HandleButton2()
 {
-
+	VegetaState->HandleButton2();
 }
 
 void AVegeta::MoveY(float AxisValue)
@@ -80,14 +87,23 @@ void AVegeta::MoveY(float AxisValue)
 	MovementVector += FVector(0.0f, AxisValue, 0.0f);
 }
 
+
+EVegetaState AVegeta::GetState()
+{
+	return VegetaState->getSid();
+}
 bool AVegeta::IsIdle()
 {
-	return (VegetaState->getSid() == VegetaState::State::Idle);
+	return (VegetaState->getSid() == EVegetaState::Idle);
 }
-
 bool AVegeta::IsPunching()
 {
 	bool aux = Punching;
 	Punching = false;
 	return aux;
+}
+void AVegeta::SetState(class VegetaState *VegetaState_)
+{
+	delete VegetaState;
+	VegetaState = VegetaState_;
 }

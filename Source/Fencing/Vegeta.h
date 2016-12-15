@@ -3,13 +3,17 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "VegetaState.h"
 #include "Vegeta.generated.h"
+
 
 
 UCLASS()
 class FENCING_API AVegeta : public ACharacter
 {
 	GENERATED_BODY()
+
+
 private:
 	class VegetaState *VegetaState;
 	FVector MovementVector = FVector::ZeroVector;
@@ -31,8 +35,12 @@ public:
 	/** Called to bind functionality to input */
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	void SetState(class VegetaState *VegetaState_);
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) class UCameraComponent* OurCamera;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere) class USpringArmComponent* SpringArm;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere) class AVegeta* Enemy;
 
 	/** Variaveis com valor padrao */
 	//UPROPERTY(BlueprintReadWrite, EditAnywhere, category="Defaults") float SpeedMultiplier;
@@ -40,4 +48,5 @@ public:
 	/** Funcoes usadas para controlar maquina de estados da animacao */
 	UFUNCTION(BlueprintCallable, BlueprintPure, category = "State") bool IsIdle();
 	UFUNCTION(BlueprintCallable, category = "State") bool IsPunching();
+	UFUNCTION(BlueprintCallable, BlueprintPure, category = "State") EVegetaState GetState();
 };

@@ -3,24 +3,37 @@
 #pragma once
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimNotifies/AnimNotify.h"
-#include "Vegeta.h"
 /**
  * 
  */
+UENUM(BlueprintType)		//"BlueprintType" is essential to include
+enum class EVegetaState : uint8
+{
+	Idle 		UMETA(DisplayName = "Idle"),
+	AttackIdle 	UMETA(DisplayName = "AttackIdle"),
+	Punch		UMETA(DisplayName = "Punch"),
+	Feint 		UMETA(DisplayName = "Feint"),
+	Jump 		UMETA(DisplayName = "Jump"),
+	Move		UMETA(DisplayName = "Move"),
+	DefendIdle 	UMETA(DisplayName = "DefendIdle"),
+	Block 		UMETA(DisplayName = "Block"),
+	Reversal	UMETA(DisplayName = "Reversal")
+};
+
+
 class FENCING_API VegetaState
 {
 public:
 	//virtual VegetaState() {}
 	virtual void Enter() {}
-	virtual class VegetaState * HandleButton1() { return this; }
-	virtual class VegetaState * HandleButton2() { return this; }
+	virtual void HandleButton1() {}
+	virtual void HandleButton2() {}
 	virtual void Update() {}
 	virtual ~VegetaState() {}
 
 
-	enum class State { Idle, Attack };
-	virtual State getSid() { return SID; }
+	virtual EVegetaState getSid() { return SID; }
 protected:
 	class AVegeta *Vegeta;
-	State SID;
+	EVegetaState SID;
 };
