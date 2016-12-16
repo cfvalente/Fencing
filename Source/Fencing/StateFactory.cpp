@@ -21,6 +21,15 @@ class AttackIdleState* StateFactory::CreateAttackIdle(class AVegeta *Vegeta)
 	return new AttackIdleState(Vegeta);
 }
 
+void StateFactory::SetDefendIdleAnimation(UAnimationAsset *Animation)
+{
+	DefendIdleState::AnimationAsset = Animation;
+}
+class DefendIdleState* StateFactory::CreateDefendIdle(class AVegeta *Vegeta)
+{
+	return new DefendIdleState(Vegeta);
+}
+
 void StateFactory::SetPunchAnimation(UAnimationAsset *Animation)
 {
 	PunchState::AnimationAsset = Animation;

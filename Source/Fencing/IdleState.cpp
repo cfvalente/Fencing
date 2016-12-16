@@ -26,9 +26,8 @@ void IdleState::HandleButton1()
 void IdleState::HandleButton2()
 {
 	/* Exemplo do que fazer - Talvez mudar para jump na versao final */
-	//////////////////////////////////
 	VegetaState *NewState;
-	NewState = StateFactory::CreateAttackIdle(Vegeta);
+	NewState = StateFactory::CreateDefendIdle(Vegeta);
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);

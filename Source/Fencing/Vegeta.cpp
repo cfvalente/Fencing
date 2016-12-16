@@ -23,8 +23,11 @@ AVegeta::AVegeta()
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetIdleAnimation(VegetaAnimationIdleObject.Object);
 
-	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationAttackdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
-	StateFactory::SetAttackIdleAnimation(VegetaAnimationAttackdleObject.Object);
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationAttackIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetAttackIdleAnimation(VegetaAnimationAttackIdleObject.Object);
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationDefendIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetDefendIdleAnimation(VegetaAnimationDefendIdleObject.Object);
 
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationPunchObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetPunchAnimation(VegetaAnimationPunchObject.Object);
