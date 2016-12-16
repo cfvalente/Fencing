@@ -5,6 +5,8 @@
 #include "IdleState.h"
 #include "PunchState.h"
 #include "AttackIdleState.h"
+#include "FeintState.h"
+
 /**
  * 
  */
@@ -19,4 +21,7 @@ public:
 
 	static void SetPunchAnimation(UAnimationAsset *Animation);
 	static class PunchState *CreatePunch(class AVegeta *Vegeta);
+
+	static void SetFeintAnimation(UAnimationAsset *Animation);
+	static class FeintState *CreateFeint(class AVegeta *Vegeta);
 };

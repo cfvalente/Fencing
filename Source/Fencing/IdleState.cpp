@@ -22,6 +22,18 @@ void IdleState::HandleButton1()
 	NewState->Enter();
 	Vegeta->SetState(NewState);
 }
+
+void IdleState::HandleButton2()
+{
+	/* Exemplo do que fazer - Talvez mudar para jump na versao final */
+	//////////////////////////////////
+	VegetaState *NewState;
+	NewState = StateFactory::CreateAttackIdle(Vegeta);
+	Vegeta->GetMesh()->Stop();
+	NewState->Enter();
+	Vegeta->SetState(NewState);
+}
+
 void IdleState::Update()
 {
 	if (Vegeta->Enemy != NULL)

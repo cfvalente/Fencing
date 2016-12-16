@@ -23,7 +23,7 @@ void AttackIdleState::HandleButton1()
 void AttackIdleState::HandleButton2()
 {
 	VegetaState *NewState;
-	NewState = StateFactory::CreateIdle(Vegeta); // Deveria ser Feint
+	NewState = StateFactory::CreateFeint(Vegeta);
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);

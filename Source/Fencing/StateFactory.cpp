@@ -29,3 +29,12 @@ class PunchState* StateFactory::CreatePunch(class AVegeta *Vegeta)
 {
 	return new PunchState(Vegeta);
 }
+
+void StateFactory::SetFeintAnimation(UAnimationAsset *Animation)
+{
+	FeintState::AnimationAsset = Animation;
+}
+class FeintState* StateFactory::CreateFeint(class AVegeta *Vegeta)
+{
+	return new FeintState(Vegeta);
+}

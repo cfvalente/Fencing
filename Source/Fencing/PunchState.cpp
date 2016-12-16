@@ -19,7 +19,7 @@ void PunchState::Update()
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
 		{
 			VegetaState *NewState;
-			NewState = StateFactory::CreateIdle(Vegeta);
+			NewState = StateFactory::CreateAttackIdle(Vegeta);
 			Vegeta->GetMesh()->Stop();
 			NewState->Enter();
 			Vegeta->SetState(NewState);

@@ -29,6 +29,9 @@ AVegeta::AVegeta()
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationPunchObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetPunchAnimation(VegetaAnimationPunchObject.Object);
 
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationFeintObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetFeintAnimation(VegetaAnimationFeintObject.Object);
+
 	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
 	//GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
 
