@@ -18,6 +18,6 @@ public:
 	virtual ~AttackIdleState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	AttackIdleState(class AVegeta *Vegeta_) { SID = EVegetaState::AttackIdle, Vegeta = Vegeta_; Active = false; }
+	AttackIdleState(class AVegeta *Vegeta_) { SID = EVegetaState::AttackIdle, Vegeta = Vegeta_; }
 	static UAnimationAsset *AnimationAsset;
 };

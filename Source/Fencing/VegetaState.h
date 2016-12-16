@@ -31,11 +31,10 @@ public:
 	virtual void HandleButton2() {}
 	virtual void Update() {}
 	virtual ~VegetaState() {}
-	virtual bool IsActive() { return Active; }
+	virtual bool IsActive() { return false; }
 
 	virtual EVegetaState getSid() { return SID; }
 protected:
 	class AVegeta *Vegeta;
 	EVegetaState SID;
-	bool Active;
 };

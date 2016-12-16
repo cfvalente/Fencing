@@ -15,7 +15,8 @@ public:
 	virtual void Update();
 	virtual ~PunchState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
+	virtual bool IsActive();
 protected:
-	PunchState(class AVegeta *Vegeta_) { SID = EVegetaState::Punch, Vegeta = Vegeta_; Active = false; }
+	PunchState(class AVegeta *Vegeta_) { SID = EVegetaState::Punch, Vegeta = Vegeta_; }
 	static UAnimationAsset *AnimationAsset;
 };

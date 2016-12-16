@@ -16,6 +16,6 @@ public:
 	virtual ~RecoveryState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	RecoveryState(class AVegeta *Vegeta_) { SID = EVegetaState::Recovery, Vegeta = Vegeta_; Active = false; }
+	RecoveryState(class AVegeta *Vegeta_) { SID = EVegetaState::Recovery, Vegeta = Vegeta_; }
 	static UAnimationAsset *AnimationAsset;
 };

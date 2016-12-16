@@ -16,6 +16,6 @@ public:
 	virtual ~FeintState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	FeintState(class AVegeta *Vegeta_) { SID = EVegetaState::Feint, Vegeta = Vegeta_; Active = false; }
+	FeintState(class AVegeta *Vegeta_) { SID = EVegetaState::Feint, Vegeta = Vegeta_; }
 	static UAnimationAsset *AnimationAsset;
 };

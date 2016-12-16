@@ -14,7 +14,6 @@ void PunchState::Enter()
 }
 void PunchState::Update()
 {
-	Active = false;
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
@@ -27,7 +26,6 @@ void PunchState::Update()
 		}
 		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
 		{
-			Active = true;
 			if (Vegeta->Enemy != NULL)
 			{
 				//Dano
@@ -45,7 +43,7 @@ void PunchState::Update()
 					// Mudanca de estado para a classe inimiga
 					// Meio que derrota o encapsulamento de OO
 					// Vai funcionar, mas vai ter repeticao de codigo em varios lugares, simplesmente uma bosta
-					// Solucao? --> Sincronizar os estados, como?! 2 ticks?
+					// Solucao? --> Sincronizar os estados, como?! 2 ticks? --> Calcular o active frame "agora" e nao deixar numa variavel -- solucao abaixo
 				}
 				else switch (Vegeta->Enemy->GetState())
 				{
@@ -62,6 +60,17 @@ void PunchState::Update()
 void PunchState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {
 	AnimationAsset = AnimationAsset_;
+}
+bool PunchState::IsActive()
+{
+	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
+	{
+		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
+		{
+			return true;
+		}
+	}
+	return false;
 }
 PunchState::~PunchState()
 {
