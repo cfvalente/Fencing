@@ -6,18 +6,16 @@
 /**
 *
 */
-class FENCING_API DefendIdleState : public VegetaState
+class FENCING_API RecoveryState : public VegetaState
 {
 	friend class StateFactory;
 
 public:
 	virtual void Enter();
-	virtual void HandleButton1();
-	virtual void HandleButton2();
 	virtual void Update();
-	virtual ~DefendIdleState();
+	virtual ~RecoveryState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	DefendIdleState(class AVegeta *Vegeta_) { SID = EVegetaState::DefendIdle, Vegeta = Vegeta_; Active = false; }
+	RecoveryState(class AVegeta *Vegeta_) { SID = EVegetaState::Recovery, Vegeta = Vegeta_; Active = false; }
 	static UAnimationAsset *AnimationAsset;
 };

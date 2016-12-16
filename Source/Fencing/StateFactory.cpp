@@ -21,15 +21,6 @@ class AttackIdleState* StateFactory::CreateAttackIdle(class AVegeta *Vegeta)
 	return new AttackIdleState(Vegeta);
 }
 
-void StateFactory::SetDefendIdleAnimation(UAnimationAsset *Animation)
-{
-	DefendIdleState::AnimationAsset = Animation;
-}
-class DefendIdleState* StateFactory::CreateDefendIdle(class AVegeta *Vegeta)
-{
-	return new DefendIdleState(Vegeta);
-}
-
 void StateFactory::SetPunchAnimation(UAnimationAsset *Animation)
 {
 	PunchState::AnimationAsset = Animation;
@@ -46,4 +37,22 @@ void StateFactory::SetFeintAnimation(UAnimationAsset *Animation)
 class FeintState* StateFactory::CreateFeint(class AVegeta *Vegeta)
 {
 	return new FeintState(Vegeta);
+}
+
+void StateFactory::SetDefendIdleAnimation(UAnimationAsset *Animation)
+{
+	DefendIdleState::AnimationAsset = Animation;
+}
+class DefendIdleState* StateFactory::CreateDefendIdle(class AVegeta *Vegeta)
+{
+	return new DefendIdleState(Vegeta);
+}
+
+void StateFactory::SetRecoveryAnimation(UAnimationAsset *Animation)
+{
+	RecoveryState::AnimationAsset = Animation;
+}
+class RecoveryState* StateFactory::CreateRecovery(class AVegeta *Vegeta)
+{
+	return new RecoveryState(Vegeta);
 }

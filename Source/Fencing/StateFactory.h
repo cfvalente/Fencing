@@ -7,6 +7,7 @@
 #include "AttackIdleState.h"
 #include "DefendIdleState.h"
 #include "FeintState.h"
+#include "RecoveryState.h"
 
 /**
  * 
@@ -20,12 +21,15 @@ public:
 	static void SetAttackIdleAnimation(UAnimationAsset *Animation);
 	static class AttackIdleState *CreateAttackIdle(class AVegeta *Vegeta);
 
-	static void SetDefendIdleAnimation(UAnimationAsset *Animation);
-	static class DefendIdleState *CreateDefendIdle(class AVegeta *Vegeta);
-
 	static void SetPunchAnimation(UAnimationAsset *Animation);
 	static class PunchState *CreatePunch(class AVegeta *Vegeta);
 
 	static void SetFeintAnimation(UAnimationAsset *Animation);
 	static class FeintState *CreateFeint(class AVegeta *Vegeta);
+
+	static void SetDefendIdleAnimation(UAnimationAsset *Animation);
+	static class DefendIdleState *CreateDefendIdle(class AVegeta *Vegeta);
+
+	static void SetRecoveryAnimation(UAnimationAsset *Animation);
+	static class RecoveryState *CreateRecovery(class AVegeta *Vegeta);
 };

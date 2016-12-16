@@ -17,7 +17,8 @@ enum class EVegetaState : uint8
 	Move		UMETA(DisplayName = "Move"),
 	DefendIdle 	UMETA(DisplayName = "DefendIdle"),
 	Block 		UMETA(DisplayName = "Block"),
-	Reversal	UMETA(DisplayName = "Reversal")
+	Reversal	UMETA(DisplayName = "Reversal"),
+	Recovery    UMETA(DisplayName = "Recovery")
 };
 
 
@@ -30,10 +31,11 @@ public:
 	virtual void HandleButton2() {}
 	virtual void Update() {}
 	virtual ~VegetaState() {}
-
+	virtual bool IsActive() { return Active; }
 
 	virtual EVegetaState getSid() { return SID; }
 protected:
 	class AVegeta *Vegeta;
 	EVegetaState SID;
+	bool Active;
 };

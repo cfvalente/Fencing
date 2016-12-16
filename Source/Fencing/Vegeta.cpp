@@ -26,14 +26,17 @@ AVegeta::AVegeta()
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationAttackIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetAttackIdleAnimation(VegetaAnimationAttackIdleObject.Object);
 
-	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationDefendIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
-	StateFactory::SetDefendIdleAnimation(VegetaAnimationDefendIdleObject.Object);
-
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationPunchObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetPunchAnimation(VegetaAnimationPunchObject.Object);
 
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationFeintObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetFeintAnimation(VegetaAnimationFeintObject.Object);
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationDefendIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetDefendIdleAnimation(VegetaAnimationDefendIdleObject.Object);
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationRecoveryObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetRecoveryAnimation(VegetaAnimationRecoveryObject.Object);
 
 	GetMesh()->SetSkeletalMesh(VegetaMeshObject.Object);
 	//GetMesh()->SetAnimInstanceClass(VegetaAnimationObject.Object->GeneratedClass);
@@ -98,15 +101,9 @@ EVegetaState AVegeta::GetState()
 {
 	return VegetaState->getSid();
 }
-bool AVegeta::IsIdle()
+bool AVegeta::IsStateActive()
 {
-	return (VegetaState->getSid() == EVegetaState::Idle);
-}
-bool AVegeta::IsPunching()
-{
-	bool aux = Punching;
-	Punching = false;
-	return aux;
+	return VegetaState->IsActive();
 }
 void AVegeta::SetState(class VegetaState *VegetaState_)
 {

@@ -14,6 +14,7 @@ void PunchState::Enter()
 }
 void PunchState::Update()
 {
+	Active = false;
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
@@ -26,12 +27,28 @@ void PunchState::Update()
 		}
 		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
 		{
+			Active = true;
 			if (Vegeta->Enemy != NULL)
 			{
-				switch (Vegeta->Enemy->GetState())
+				//Dano
+				if (!Vegeta->Enemy->IsStateActive())
 				{
-					case EVegetaState::DefendIdle:
-						break;
+					/* Ideia 1 */
+					//Som da porrada
+					//Particulas da porrada
+					//O dano é calculado na classe inimiga
+					//Pode haver problema com os frames --> Codigo foi processado aqui, mas la ainda nao, o active frame pode mudar no meio do caminho e o sistema vai ficar num estado "estranho"
+					/* Ideia 2 */
+					// Som da Porrada
+					// Particulas da porrada
+					// Dano calculado aqui e setado na classe inimiga
+					// Mudanca de estado para a classe inimiga
+					// Meio que derrota o encapsulamento de OO
+					// Vai funcionar, mas vai ter repeticao de codigo em varios lugares, simplesmente uma bosta
+					// Solucao? --> Sincronizar os estados, como?! 2 ticks?
+				}
+				else switch (Vegeta->Enemy->GetState())
+				{
 					case EVegetaState::Block:
 						break;
 					case EVegetaState::Reversal:
