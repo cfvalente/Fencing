@@ -39,6 +39,24 @@ class FeintState* StateFactory::CreateFeint(class AVegeta *Vegeta)
 	return new FeintState(Vegeta);
 }
 
+void StateFactory::SetReversalAnimation(UAnimationAsset *Animation)
+{
+	ReversalState::AnimationAsset = Animation;
+}
+class ReversalState* StateFactory::CreateReversal(class AVegeta *Vegeta)
+{
+	return new ReversalState(Vegeta);
+}
+
+void StateFactory::SetBlockAnimation(UAnimationAsset *Animation)
+{
+	BlockState::AnimationAsset = Animation;
+}
+class BlockState* StateFactory::CreateBlock(class AVegeta *Vegeta)
+{
+	return new BlockState(Vegeta);
+}
+
 void StateFactory::SetDefendIdleAnimation(UAnimationAsset *Animation)
 {
 	DefendIdleState::AnimationAsset = Animation;

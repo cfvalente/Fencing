@@ -32,8 +32,14 @@ AVegeta::AVegeta()
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationFeintObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetFeintAnimation(VegetaAnimationFeintObject.Object);
 
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationBlockObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetBlockAnimation(VegetaAnimationBlockObject.Object);
+
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationDefendIdleObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetDefendIdleAnimation(VegetaAnimationDefendIdleObject.Object);
+
+	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationReversalObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
+	StateFactory::SetReversalAnimation(VegetaAnimationReversalObject.Object);
 
 	static ConstructorHelpers::FObjectFinder<UAnimationAsset> VegetaAnimationRecoveryObject(TEXT("AnimSequence'/Game/Mannequin/Animations/ThirdPersonIdle.ThirdPersonIdle'")); // wherein /Game/ is the Content folder.
 	StateFactory::SetRecoveryAnimation(VegetaAnimationRecoveryObject.Object);

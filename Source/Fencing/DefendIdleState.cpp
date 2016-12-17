@@ -14,23 +14,19 @@ void DefendIdleState::Enter()
 }
 void DefendIdleState::HandleButton1()
 {
-	/*
 	VegetaState *NewState;
-	NewState = StateFactory::CreatePunch(Vegeta);
+	NewState = StateFactory::CreateBlock(Vegeta);
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
-	*/
 }
 void DefendIdleState::HandleButton2()
 {
-	/*
 	VegetaState *NewState;
-	NewState = StateFactory::CreateFeint(Vegeta);
+	NewState = StateFactory::CreateReversal(Vegeta);
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
-	*/
 }
 void DefendIdleState::Update()
 {

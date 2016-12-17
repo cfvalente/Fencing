@@ -7,6 +7,8 @@
 #include "AttackIdleState.h"
 #include "DefendIdleState.h"
 #include "FeintState.h"
+#include "ReversalState.h"
+#include "BlockState.h"
 #include "RecoveryState.h"
 
 /**
@@ -26,6 +28,12 @@ public:
 
 	static void SetFeintAnimation(UAnimationAsset *Animation);
 	static class FeintState *CreateFeint(class AVegeta *Vegeta);
+
+	static void SetReversalAnimation(UAnimationAsset *Animation);
+	static class ReversalState *CreateReversal(class AVegeta *Vegeta);
+
+	static void SetBlockAnimation(UAnimationAsset *Animation);
+	static class BlockState *CreateBlock(class AVegeta *Vegeta);
 
 	static void SetDefendIdleAnimation(UAnimationAsset *Animation);
 	static class DefendIdleState *CreateDefendIdle(class AVegeta *Vegeta);
