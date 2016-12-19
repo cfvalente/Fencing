@@ -15,15 +15,57 @@ void BlockState::Enter()
 
 void BlockState::Update()
 {
+	bool Active = false;
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
 		{
-			VegetaState *NewState;
-			NewState = StateFactory::CreateDefendIdle(Vegeta);
-			Vegeta->GetMesh()->Stop();
-			NewState->Enter();
-			Vegeta->SetState(NewState);
+			if (Block)
+			{
+				//DANO -- Tomei chip damage e mudei de estado
+				VegetaState *NewState;
+				NewState = StateFactory::CreateDefendIdle(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+			else
+			{
+				VegetaState *NewState;
+				NewState = StateFactory::CreateDefendIdle(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+
+		}
+		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
+		{
+			Active = true;
+		}
+	}
+	if (Vegeta->Enemy != NULL && !(Block))
+	{
+		bool EnemyActive = Vegeta->Enemy->IsStateActive();
+		if (Vegeta->Enemy->GetState() == EVegetaState::Punch)
+		{
+			if (Active && EnemyActive)
+			{
+				Block = true;
+				return;
+			}
+			else if (!(Active) && EnemyActive)
+			{
+				//DANO -- Tomei dano
+				VegetaState *NewState;
+				NewState = StateFactory::CreateRecovery(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
 		}
 	}
 }

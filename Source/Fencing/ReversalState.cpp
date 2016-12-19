@@ -14,48 +14,60 @@ void ReversalState::Enter()
 }
 void ReversalState::Update()
 {
+	bool Active = false;
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
 		{
-			VegetaState *NewState;
-			NewState = StateFactory::CreateDefendIdle(Vegeta);
-			Vegeta->GetMesh()->Stop();
-			NewState->Enter();
-			Vegeta->SetState(NewState);
+			if (Reversal)
+			{
+				//DANO??? -- Dei dano(? - Acho que faz sentido reversal dar dano) e mudei de estado
+				// Particulas e som
+				VegetaState *NewState;
+				NewState = StateFactory::CreateAttackIdle(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+			else
+			{
+				VegetaState *NewState;
+				NewState = StateFactory::CreateDefendIdle(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+
 		}
 		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
 		{
-			if (Vegeta->Enemy != NULL)
+			Active = true;
+		}
+	}
+	if (Vegeta->Enemy != NULL && !(Reversal))
+	{
+		bool EnemyActive = Vegeta->Enemy->IsStateActive();
+		if (Vegeta->Enemy->GetState() == EVegetaState::Punch)
+		{
+			if (Active && EnemyActive)
 			{
-				//Dano
-				if (!Vegeta->Enemy->IsStateActive())
-				{
-					/* Ideia 1 */
-					//Som da porrada
-					//Particulas da porrada
-					//O dano é calculado na classe inimiga
-					//Pode haver problema com os frames --> Codigo foi processado aqui, mas la ainda nao, o active frame pode mudar no meio do caminho e o sistema vai ficar num estado "estranho"
-					/* Ideia 2 */
-					// Som da Porrada
-					// Particulas da porrada
-					// Dano calculado aqui e setado na classe inimiga
-					// Mudanca de estado para a classe inimiga
-					// Meio que derrota o encapsulamento de OO
-					// Vai funcionar, mas vai ter repeticao de codigo em varios lugares, simplesmente uma bosta
-					// Solucao? --> Sincronizar os estados, como?! 2 ticks? --> Calcular o active frame "agora" e nao deixar numa variavel -- solucao abaixo
-				}
-				else switch (Vegeta->Enemy->GetState())
-				{
-				case EVegetaState::Block:
-					break;
-				case EVegetaState::Reversal:
-					break;
-				}
+				Reversal = true;
+				return;
+			}
+			else if (!(Active) && EnemyActive)
+			{
+				//DANO -- Tomei dano
+				VegetaState *NewState;
+				NewState = StateFactory::CreateRecovery(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
 			}
 		}
 	}
-
 }
 void ReversalState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {

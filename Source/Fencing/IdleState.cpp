@@ -21,6 +21,7 @@ void IdleState::HandleButton1()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 
 void IdleState::HandleButton2()
@@ -31,6 +32,7 @@ void IdleState::HandleButton2()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 
 void IdleState::Update()
@@ -42,6 +44,7 @@ void IdleState::Update()
 		Vegeta->GetMesh()->Stop();
 		NewState->Enter();
 		Vegeta->SetState(NewState);
+		return;
 	}
 	// Detecta o Notify State
 	/*for (auto it = Vegeta->GetMesh()->AnimScriptInstance->ActiveAnimNotifyState.CreateIterator(); it; ++it )

@@ -19,6 +19,7 @@ void AttackIdleState::HandleButton1()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 void AttackIdleState::HandleButton2()
 {
@@ -27,6 +28,7 @@ void AttackIdleState::HandleButton2()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 void AttackIdleState::Update()
 {

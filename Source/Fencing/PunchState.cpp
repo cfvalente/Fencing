@@ -14,6 +14,7 @@ void PunchState::Enter()
 }
 void PunchState::Update()
 {
+	bool Active = false;
 	for (auto it = Vegeta->GetMesh()->AnimScriptInstance->NotifyQueue.AnimNotifies.CreateIterator(); it; ++it)
 	{
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
@@ -23,39 +24,58 @@ void PunchState::Update()
 			Vegeta->GetMesh()->Stop();
 			NewState->Enter();
 			Vegeta->SetState(NewState);
+			return;
 		}
 		if ((*it)->NotifyName.ToString() == "VegetaActiveFrames")
 		{
-			if (Vegeta->Enemy != NULL)
-			{
-				//Dano
-				if (!Vegeta->Enemy->IsStateActive())
-				{
-					/* Ideia 1 */
-					//Som da porrada
-					//Particulas da porrada
-					//O dano é calculado na classe inimiga
-					//Pode haver problema com os frames --> Codigo foi processado aqui, mas la ainda nao, o active frame pode mudar no meio do caminho e o sistema vai ficar num estado "estranho"
-					/* Ideia 2 */
-					// Som da Porrada
-					// Particulas da porrada
-					// Dano calculado aqui e setado na classe inimiga
-					// Mudanca de estado para a classe inimiga
-					// Meio que derrota o encapsulamento de OO
-					// Vai funcionar, mas vai ter repeticao de codigo em varios lugares, simplesmente uma bosta
-					// Solucao? --> Sincronizar os estados, como?! 2 ticks? --> Calcular o active frame "agora" e nao deixar numa variavel -- solucao abaixo
-				}
-				else switch (Vegeta->Enemy->GetState())
-				{
-					case EVegetaState::Block:
-						break;
-					case EVegetaState::Reversal:
-						break;
-				}
-			}
+			Active = true;
 		}
 	}
-
+	if (Vegeta->Enemy != NULL && !(Punch) && Active)
+	{
+		bool EnemyActive = Vegeta->Enemy->IsStateActive();
+		switch (Vegeta->Enemy->GetState())
+		{
+			case EVegetaState::Reversal:
+				if (EnemyActive)
+				{
+					//DANO??? -- Tomei dano???
+					VegetaState *NewState;
+					NewState = StateFactory::CreateDefendIdle(Vegeta);
+					Vegeta->GetMesh()->Stop();
+					NewState->Enter();
+					Vegeta->SetState(NewState);
+					return;
+				}
+				else if (!(EnemyActive))
+				{
+					// Particulas e som
+					Punch = true;
+					return;
+				}
+				break;
+			case EVegetaState::Block:
+				Punch = true;
+				if (EnemyActive)
+				{
+					//Som e Particulas de block
+				}
+				else
+				{
+					//Som e particulas normais
+				}
+				break;
+			case EVegetaState::DefendIdle:
+				Punch = true;
+				//Som e particulas
+				break;
+			case EVegetaState::Recovery:
+				/* Permitir combos? */
+				Punch = true;
+				// Som e particulas
+				break;
+		}
+	}
 }
 void PunchState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {

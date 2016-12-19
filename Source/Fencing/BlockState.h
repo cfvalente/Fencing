@@ -16,6 +16,7 @@ public:
 	virtual ~BlockState();
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 protected:
-	BlockState(class AVegeta *Vegeta_) { SID = EVegetaState::Block, Vegeta = Vegeta_; }
+	BlockState(class AVegeta *Vegeta_) { SID = EVegetaState::Block, Vegeta = Vegeta_, Block = false; }
 	static UAnimationAsset *AnimationAsset;
+	bool Block;
 };

@@ -19,6 +19,7 @@ void DefendIdleState::HandleButton1()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 void DefendIdleState::HandleButton2()
 {
@@ -27,9 +28,27 @@ void DefendIdleState::HandleButton2()
 	Vegeta->GetMesh()->Stop();
 	NewState->Enter();
 	Vegeta->SetState(NewState);
+	return;
 }
 void DefendIdleState::Update()
 {
+	if (Vegeta->Enemy != NULL)
+	{
+		bool EnemyActive = Vegeta->Enemy->IsStateActive();
+		if (Vegeta->Enemy->GetState() == EVegetaState::Punch)
+		{
+			if (EnemyActive)
+			{
+				//DANO -- Tomei dano
+				VegetaState *NewState;
+				NewState = StateFactory::CreateRecovery(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+		}
+	}
 }
 void DefendIdleState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {

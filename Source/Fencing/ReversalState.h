@@ -17,6 +17,7 @@ public:
 	void SetAnimation(UAnimationAsset *AnimationAsset_);
 	virtual bool IsActive();
 protected:
-	ReversalState(class AVegeta *Vegeta_) { SID = EVegetaState::Reversal, Vegeta = Vegeta_; }
+	ReversalState(class AVegeta *Vegeta_) { SID = EVegetaState::Reversal, Vegeta = Vegeta_, WasDamaged = false, Reversal = false; }
 	static UAnimationAsset *AnimationAsset;
+	bool WasDamaged, Reversal;
 };

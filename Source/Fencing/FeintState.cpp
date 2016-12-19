@@ -24,6 +24,7 @@ void FeintState::Update()
 			Vegeta->GetMesh()->Stop();
 			NewState->Enter();
 			Vegeta->SetState(NewState);
+			return;
 		}
 	}
 }

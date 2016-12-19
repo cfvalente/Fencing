@@ -19,13 +19,30 @@ void RecoveryState::Update()
 		if ((*it)->NotifyName.ToString() == "VegetaAnimEnd")
 		{
 			VegetaState *NewState;
-			NewState = StateFactory::CreateAttackIdle(Vegeta);
+			NewState = StateFactory::CreateDefendIdle(Vegeta);
 			Vegeta->GetMesh()->Stop();
 			NewState->Enter();
 			Vegeta->SetState(NewState);
+			return;
 		}
 	}
-
+	if (Vegeta->Enemy != NULL)
+	{
+		bool EnemyActive = Vegeta->Enemy->IsStateActive();
+		if (Vegeta->Enemy->GetState() == EVegetaState::Punch)
+		{
+			if (EnemyActive)
+			{
+				//DANO??? -- Tomei dano - permitir combos?
+				VegetaState *NewState;
+				NewState = StateFactory::CreateRecovery(Vegeta);
+				Vegeta->GetMesh()->Stop();
+				NewState->Enter();
+				Vegeta->SetState(NewState);
+				return;
+			}
+		}
+	}
 }
 void RecoveryState::SetAnimation(UAnimationAsset *AnimationAsset_)
 {
